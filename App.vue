@@ -13,7 +13,6 @@ import MainLayout from './layouts/MainLayout.vue'
 export default {
   computed: {
     layout () {
-      console.log('lo_ol__line_16 >>> ', (this.$route.meta.layout || 'empty') + '-layout')
       return (this.$route.meta.layout || 'empty') + '-layout'
     }
   },

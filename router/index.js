@@ -8,7 +8,10 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      layout: 'main'
+    }
   },
   {
     path: '/login',
@@ -35,12 +38,12 @@ const routes = [
     component: () => import('../views/Categories')
   },
   {
-    path: '/detail-record',
-    name: 'Detail-record',
+    path: '/details',
+    name: 'Details',
     meta: {
       layout: 'main'
     },
-    component: () => import('../views/Detail-record')
+    component: () => import('../views/Details')
   },
   {
     path: '/history',
