@@ -16,7 +16,7 @@
             data-target="dropdown"
             ref="dropdown"
           >
-            USER NAME
+            {{name}}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -46,6 +46,11 @@ export default {
     interval: null,
     dropdown: null
   }),
+  computed: {
+    name () {
+      return this.$store.getters.info.name
+    }
+  },
   // mounted - прогружается после построение ДОМ элементов, необходимо для некоторых объектов
   mounted () {
     this.interval = setInterval(() => {
@@ -58,16 +63,14 @@ export default {
     })
   },
   methods: {
-    logout () {
-      console.log('LOGOUT!')
-      this.$router.push('/login?message=logout')
+    async logout () {
+      await this.$store.dispatch('logout')
+      await this.$router.push('/login?message=logout')
     }
   },
   beforeDestroy () {
-    console.log('beforeDestroy --->>')
     clearInterval(this.interval)
     if (this.dropdown && this.dropdown.destroy) {
-      console.log('>> this.dropdown.destroy')
       // eslint-disable-next-line no-unused-expressions
       this.dropdown.destroy
     }

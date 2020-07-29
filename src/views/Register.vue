@@ -30,7 +30,7 @@
         >Ввведите пароль</small>
         <small class="helper-text invalid"
                v-else-if="$v.password.$dirty && !$v.password.minLength"
-        >Пароль должен быть не короче 6 чимволов, сейчас он {{password.length}} символов</small>
+        >Пароль должен быть не короче 4 чимволов, сейчас он {{password.length}} символов</small>
       </div>
       <div class="input-field">
         <input
@@ -83,25 +83,28 @@ export default {
   }),
   validations: {
     email: { email, required },
-    password: { required, minLength: minLength(6) },
+    password: { required, minLength: minLength(4) },
     name: { required },
     agree: { checked: v => v }
   },
   methods: {
-    checkHandler () {
+    async checkHandler () {
       if (this.$v.$invalid) {
         this.$v.$touch()
-        console.log('Validation error!!!!')
         return
       }
-      const forData = {
+      const formData = {
         email: this.email,
         password: this.password,
         name: this.name
       }
 
-      console.log('forData:: ', forData)
-      this.$router.push('/')
+      try {
+        await this.$store.dispatch('register', formData)
+        await this.$router.push('/')
+      } catch (e) {
+        console.log('[Error registration]: ', e.message)
+      }
     }
   }
 }

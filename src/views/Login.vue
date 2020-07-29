@@ -30,7 +30,7 @@
         >Ввведите пароль</small>
         <small class="helper-text invalid"
                v-else-if="$v.password.$dirty && !$v.password.minLength"
-        >Пароль должен быть не короче 6 чимволов, сейчас он {{password.length}} символов</small>
+        >Пароль должен быть не короче 4 чимволов, сейчас он {{password.length}} символов</small>
       </div>
     </div>
     <div class="card-action">
@@ -64,7 +64,7 @@ export default {
   }),
   validations: {
     email: { email, required },
-    password: { required, minLength: minLength(6) }
+    password: { required, minLength: minLength(4) }
   },
   mounted () {
     if (messages[this.$route.query.message]) {

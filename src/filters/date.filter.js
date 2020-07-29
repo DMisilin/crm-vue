@@ -13,5 +13,6 @@ export default function dateFilter (value, format = 'date') {
     options.second = 'numeric'
     options.hour12 = false
   }
+
   return new Intl.DateTimeFormat('ru-Ru', options).format(value)
 }

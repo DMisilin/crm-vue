@@ -3,3 +3,22 @@
     <router-view/>
   </div>
 </template>
+
+<script>
+import messages from '../utils/messages.js'
+
+export default {
+  computed: {
+    error () {
+      return this.$store.getters.error
+    }
+  },
+  watch: {
+    error: function (fbError) {
+      console.log(fbError)
+      console.log(messages[fbError.code] || 'Что-то пошло не так!')
+      this.$error(messages[fbError.code] || 'Что-то пошло не так!')
+    }
+  }
+}
+</script>
